@@ -28,5 +28,35 @@ function addTodo(string $description) {
     //output
     echo "Task success added (ID: {$id})" . PHP_EOL;
 }
+/*Update Todo
+update status
+*/
+function updateStatus(int $id, string $status) {
+    //take task target
+    $tasks = readTasks();
+    $found = false;
+    foreach($tasks as &$task) {
+    //find id correct
+    if($task["id"] == $id) {
+        //Update status
+        $task["status"] = $status;
+        //Update Waktu
+        $task["updateAt"] = date("Y-m-d H:i:s");
+
+        $found = true;
+        break;
+    }
+    }
+    //if id not found
+     if (!$found) {
+        echo "Task not found" . PHP_EOL;
+        return;
+     }
+    saveTasks($tasks);
+
+    echo "Task updated successfully" . PHP_EOL;
+}
+
+
 
 ?>
